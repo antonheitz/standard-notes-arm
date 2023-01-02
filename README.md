@@ -186,7 +186,8 @@ Now you should be able to upload files to your SN instance.
 
 Updates are a bit critical. If you use the standard mechanism for updating you will run into issues. The best way is to create a backup of your files via the Client and reinstall the docker containers.
 
-***Please back up your Files!***
+***Please back up your Files via the Settings!***
+Attention: currently the uploaded Files to the files tab will be empty in the backup. Please download them seperately and upload them again after the backup import.
 
 ```bash
 cd ~/self-hosted
@@ -197,4 +198,4 @@ rm -r self-hosted
 rm -r server
 ```
 
-Then just reperform the [install of standard notes](#install-standardnotes)
+Then just reperform the [install of standard notes](#install-standardnotes) and import the backup after you created an account, added the subscription and have the files server available!
