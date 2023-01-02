@@ -63,8 +63,10 @@ docker compose version
 To build the image contents you will need node and npm.
 
 ```bash
-sudo apt-get install npm
-sudo npm install --global yarn
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install -g npm@latest
+sudo npm install -g yarn
 ```
 
 Then reboot the server:
