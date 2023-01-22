@@ -12,13 +12,11 @@ In case you notice this does not work anymore, hit me up on  Discord (Teeseus#98
 1. [Base dependencies](#base-dependencies)
 	1. [install Docker](#install-docker)
 	2. [install Docker-Compose](#install-docker-compose)
-	3. [install Node and Yarn](#install-node-and-yarn)
 2. [install Standardnotes](#install-standardnotes)
-	1. [build the Images](#build-the-images)
+	1. [Retag database Images](#retag-database-images)
 	2. [Run the Standalone](#run-the-standalone)
 	3. [Adding your subscription](#adding-your-subscription)
 	4. [Configure the files server](#configure-the-files-server)
-3. [How to Update](#how-to-update)
 
 ## Base dependencies
 
@@ -83,33 +81,13 @@ yarn -v
 
 ## Install Standardnotes
 
-Standardnotes sadly odes not provide docker images for ARM-systems. To keep up with the transparency we will build those images for ARM directly from the SN Sources, although some Modifications are needed. This Guide will go through it step by step, so you have the original and safe experience provided by Standardnotes!
+Standardnotes provides docker images for ARM-systems by now. Although some Modifications are needed. This Guide will go through it step by step, so you have the original and safe experience provided by Standardnotes!
 
-### Build the images
+### Retag database Images
 
-Lets start of with building the necessary server images.  For this we nee the [SN Server Monorepo](https://github.com/standardnotes/server):
-
-```bash
-cd ~
-git clone https://github.com/standardnotes/server
-cd server
-```
-
-Now you can build all server parts:
+Pull the ARM-compatible database and retag it:
 
 ```bash
-yarn install
-yarn build
-```
-
-From here your can build all the necessary images for your architecture:
-
-```bash
-docker build -t standardnotes/syncing-server-js -f ./packages/syncing-server/Dockerfile .
-docker build -t standardnotes/api-gateway -f ./packages/api-gateway/Dockerfile .
-docker build -t standardnotes/auth -f ./packages/auth/Dockerfile .
-docker build -t standardnotes/files -f ./packages/files/Dockerfile .
-docker build -t standardnotes/revisions -f ./packages/revisions/Dockerfile .
 docker pull mariadb
 docker image tag mariadb:latest mysql:5.6
 docker image tag mariadb:latest mysql:8
@@ -183,21 +161,3 @@ bash ./server.sh start
 ```
 
 Now you should be able to upload files to your SN instance.
-
-## How To Update
-
-Updates are a bit critical. If you use the standard mechanism for updating you will run into issues. The best way is to create a backup of your files via the Client and reinstall the docker containers.
-
-***Please back up your Files via the Settings!***
-Attention: currently the uploaded Files to the files tab will be empty in the backup. Please download them seperately and upload them again after the backup import.
-
-```bash
-cd ~/self-hosted
-bash ./server.sh stop
-bash ./server.sh cleanup
-cd ~
-rm -r self-hosted
-rm -r server
-```
-
-Then just reperform the [install of standard notes](#install-standardnotes) and import the backup after you created an account, added the subscription and have the files server available!
