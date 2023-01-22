@@ -56,29 +56,6 @@ Check if docker-compose was installed correctly:
 docker compose version
 ```
 
-### install Node and Yarn
-
-To build the image contents you will need node and npm.
-
-```bash
-curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g npm@latest
-sudo npm install -g yarn
-```
-
-Then reboot the server:
-
-```bash
-sudo reboot
-```
-
-With a new connection you can verify your yarn:
-
-```bash
-yarn -v
-```
-
 ## Install Standardnotes
 
 Standardnotes provides docker images for ARM-systems by now. Although some Modifications are needed. This Guide will go through it step by step, so you have the original and safe experience provided by Standardnotes!
